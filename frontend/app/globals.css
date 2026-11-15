@@ -1,0 +1,16 @@
+@import "tailwindcss";
+:root {color-scheme: light;}
+body {margin: 0; background: #f5f8f5; color: #334155; font-family: Arial, Helvetica, sans-serif;}
+button, a, input { -webkit-tap-highlight-color: transparent; }
+button {cursor: pointer;}
+button:disabled {cursor: not-allowed;}
+:focus-visible {outline: 3px solid #0f766e; outline-offset: 4px;}
+@layer components {
+  .panel {@apply rounded-3xl border border-teal-900/10 bg-white p-6 sm:p-8;}
+  .eyebrow {@apply text-[10px] font-bold tracking-[0.19em] text-teal-700;}
+  .step {@apply mr-3 inline-flex h-6 w-6 items-center justify-center rounded-full bg-teal-50 text-xs text-teal-800;}
+  label:not(:has(input[type=radio])) {@apply mb-2 block text-sm font-medium text-slate-700;}
+  input:not([type=radio]) {@apply w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-800 placeholder:text-slate-400 disabled:bg-slate-100;}
+  .primary {@apply rounded-xl bg-teal-800 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-teal-900 disabled:opacity-40;}
+  .secondary {@apply rounded-xl border border-teal-800 px-4 py-2.5 text-sm font-semibold text-teal-800 transition hover:bg-teal-50 disabled:opacity-40;}
+}
