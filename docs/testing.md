@@ -46,3 +46,18 @@ Run tests only against a disposable PostgreSQL database: fixtures TRUNCATE all c
 - The project directory is not an initialized Git repository; its .git placeholder cannot be used for commits.
 
 No automated runtime test, security audit, frontend build or deployed URL should be reported as passing on the basis of syntax compilation.
+
+## Patient journey regression checks
+
+The frontend follows the reference journey at https://koya-clinic.firefalltechnologies.ng/:
+
+1. Open `/`: future slots are grouped by local calendar day; booked slots are visible but cannot be booked.
+2. Filter by provider, day, time of day and availability; verify combinations, clearing filters, empty results and all sort options.
+3. Choose **Book**: a modal shows the selected provider and time before asking for name and email. Check keyboard focus, Escape, close and Cancel.
+4. Confirm with synthetic details: the dialog closes and the confirmation receives focus, showing the booking reference. Refresh the list and verify the slot is booked.
+5. Open `/bookings`: search by email, verify empty results, booking details and pagination. Changing the email must start a fresh search.
+6. Cancel an appointment: dismissing the confirmation preserves it; accepting marks it cancelled in history and releases its slot. Booking it again must create a fresh attempt key.
+7. Verify lookup by reference, server errors, unavailable backend, duplicate-slot conflict and rate-limit feedback. A failed slot fetch must show a retry prompt rather than imply there are no appointments.
+8. Repeat at a mobile width and with keyboard navigation. Dialog focus must stay inside the open modal and return to its trigger when dismissed.
+
+These UI changes still require runtime verification once frontend dependencies and a test backend are available.
